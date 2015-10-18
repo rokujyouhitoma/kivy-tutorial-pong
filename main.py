@@ -8,7 +8,7 @@ from kivy.properties import NumericProperty, ReferenceListProperty,\
     ObjectProperty
 from kivy.vector import Vector
 from kivy.clock import Clock
-
+from r12a import Keyboard
 
 class PongPaddle(Widget):
     score = NumericProperty(0)
@@ -46,13 +46,13 @@ class PongGame(Widget):
         self._keyboard = None
 
     def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
-        if keycode[1] == 'w':
+        if keycode[1] == Keyboard.keycodes['w']:
             self.player1.center_y += 10
-        elif keycode[1] == 's':
+        elif keycode[1] == Keyboard.keycodes['s']:
             self.player1.center_y -= 10
-        elif keycode[1] == 'up':
+        elif keycode[1] == Keyboard.keycodes['up']:
             self.player2.center_y += 10
-        elif keycode[1] == 'down':
+        elif keycode[1] == Keyboard.keycodes['down']:
             self.player2.center_y -= 10
         return True
 
