@@ -2,6 +2,7 @@ import kivy
 kivy.require('1.9.0')
 
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, ReferenceListProperty,\
     ObjectProperty
@@ -34,6 +35,26 @@ class PongGame(Widget):
     ball = ObjectProperty(None)
     player1 = ObjectProperty(None)
     player2 = ObjectProperty(None)
+
+    def __init__(self, **kwargs):
+        super(PongGame, self).__init__(**kwargs)
+        self._keyboard = Window.request_keyboard(self._keyboard_unbind, self)
+        self._keyboard.bind(on_key_down=self._on_keyboard_down)
+
+    def _keyboard_unbind(self):
+        self._keyboard.unbind(on_key_down=self._on_keyboard_down)
+        self._keyboard = None
+
+    def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
+        if keycode[1] == 'w':
+            self.player1.center_y += 10
+        elif keycode[1] == 's':
+            self.player1.center_y -= 10
+        elif keycode[1] == 'up':
+            self.player2.center_y += 10
+        elif keycode[1] == 'down':
+            self.player2.center_y -= 10
+        return True
 
     def serve_ball(self, vel=(4, 0)):
         self.ball.center = self.center
