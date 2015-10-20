@@ -28,7 +28,7 @@ class PongBall(Widget):
     velocity = ReferenceListProperty(velocity_x, velocity_y)
 
     def update(self):
-        move()
+        self.move()
 
     def move(self):
         self.pos = Vector(*self.velocity) + self.pos
@@ -74,10 +74,12 @@ class PongGame(Widget):
 
         if self.ball.x < self.x:
             self.player2.score += 1
-            self.serve_ball(vel=(4, 0))
+            x, y = self.ball.velocity
+            self.serve_ball(vel=(x * -1, 0))
         if self.ball.x > self.width:
             self.player1.score += 1
-            self.serve_ball(vel=(-4, 0))
+            x, y = self.ball.velocity
+            self.serve_ball(vel=(x * -1, 0))
 
     def on_touch_move(self, touch):
         if touch.x < self.width / 3:
