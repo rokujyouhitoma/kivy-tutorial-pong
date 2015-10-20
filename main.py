@@ -27,7 +27,7 @@ class PongBall(Widget):
     velocity_y = NumericProperty(0)
     velocity = ReferenceListProperty(velocity_x, velocity_y)
 
-    def update(self):
+    def update(self, dt):
         self.move()
 
     def move(self):
@@ -64,7 +64,7 @@ class PongGame(Widget):
         self.ball.velocity = vel
 
     def update(self, dt):
-        self.ball.update()
+        self.ball.update(dt)
 
         self.player1.bounce_ball(self.ball)
         self.player2.bounce_ball(self.ball)
