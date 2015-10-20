@@ -1,3 +1,5 @@
 
+DIR=$(shell pwd)
+
 run:
-	$(KIVYPATH) ./main.py
+	$(KIVYPATH) $(DIR)/main.py
