@@ -1,0 +1,3 @@
+
+run:
+	$(KIVYPATH) ./main.py
